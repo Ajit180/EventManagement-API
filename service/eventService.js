@@ -81,3 +81,38 @@ export const registerUserService = async (EventId, userId) => {
     throw error;
   }
 };
+
+
+export const cancelRegistrationService = async(EventId,userId)=>{
+
+    try {
+        const EventFetch = await Event.findById(EventId);
+        if (!EventFetch) {
+          throw {
+           status: 404,
+            message: "Event is not Exits",
+            };
+         }
+
+         const isUserRegister =  EventFetch.registrations.some(
+        (registredUserId)=>registredUserId.toString()===userId
+      )
+
+      if(!isUserRegister){
+        throw{
+            status:409,
+            message:"User wasn't registered"
+        }
+      }
+
+      if(isUserRegister){
+        EventFetch.registrations.pull(userId);
+        await EventFetch.save();
+      }
+
+        
+    } catch (error) {
+        console.log("Error while CancelRegistration",error);
+        throw error;
+    }
+}

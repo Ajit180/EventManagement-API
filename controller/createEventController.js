@@ -1,4 +1,4 @@
-import { createEvent, getAllEventService, registerUserService } from "../service/eventService.js";
+import { cancelRegistrationService, createEvent, getAllEventService, registerUserService } from "../service/eventService.js";
 
 
 export const createEventController = async(req,res)=>{
@@ -61,6 +61,30 @@ export const registerUserController = async(req,res)=>{
         return res.status(409).json({
             success:false,
             message:"User is Already part of the Event ",
+            data:error
+        })
+    }
+}
+
+export const cancelRegistrationController = async(req,res)=>{
+    try {
+        const {EventId}= req.params;
+        const {userId} = req.body;
+        console.log(EventId);
+
+        const event = await cancelRegistrationService(EventId,userId);
+
+        return res.status(201).json({
+            success:true,
+            message:"User is Registration is Cancelled",
+            data:event
+        })
+        
+    } catch (error) {
+        console.log("Error in Cancelling User");
+         return res.status(409).json({
+            success:false,
+            message:"User is not Registred ",
             data:error
         })
     }
