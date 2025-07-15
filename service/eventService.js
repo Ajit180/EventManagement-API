@@ -144,3 +144,24 @@ export const futureEventService = async(sortBy)=>{
         throw error;
     }
 }
+
+
+export const eventStatService = async(EventId)=>{
+    try {
+
+        const event = await Event.findById(EventId);
+        const totalregistration = event.registrations.length;
+        const remaningcapacity = event.capacity - totalregistration;
+        const percentageused = Math.round((totalregistration/event.capacity)*100)
+
+        return {
+            EventId,
+            totalregistration,
+            remaningcapacity,
+            percentageused
+        }
+        
+    } catch (error) {
+        console.log("Error in getting the eventStats",error);
+    }
+}

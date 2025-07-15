@@ -1,4 +1,4 @@
-import { cancelRegistrationService, createEvent, futureEventService, getAllEventService, registerUserService } from "../service/eventService.js";
+import { cancelRegistrationService, createEvent, eventStatService, futureEventService, getAllEventService, registerUserService } from "../service/eventService.js";
 
 
 export const createEventController = async(req,res)=>{
@@ -107,5 +107,21 @@ export const futureEventsController = async(req,res)=>{
         success:false,
         message:"Error in Fetching the Future Events"
        })
+    }
+}
+
+export const eventStatsController = async(req,res)=>{
+
+    try {
+        const {EventId}= req.params;
+        const response = await eventStatService(EventId);
+        return res.status(201).json({
+            success:true,
+            message:"All Event Stats fetch successfully",
+            data:response
+        })
+        
+    } catch (error) {
+        console.log("Error in getting the Event stats",error);
     }
 }
