@@ -116,3 +116,31 @@ export const cancelRegistrationService = async(EventId,userId)=>{
         throw error;
     }
 }
+
+
+export const futureEventService = async(sortBy)=>{
+
+    try {
+
+        //dynamic sorting 
+        let sortcriteria = {};
+        if(sortBy==='location'){
+            sortcriteria.location = 1;
+        }else if(sortBy==='title'){
+           sortcriteria.title =1
+        }else{
+            sortcriteria.dateTime=1; //by default
+        }
+
+        const now = new Date();
+        let filter = {dateTime:{$gt:now}}
+
+        const futureEvents = await Event.find(filter).sort(sortcriteria);
+        return futureEvents;
+
+        
+    } catch (error) {
+        console.log("Error in finding the Events",error);
+        throw error;
+    }
+}
