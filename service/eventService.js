@@ -2,10 +2,21 @@ import Event from "../model/event.js";
 
 export const createEvent = async (data) => {
   try {
-    const title = data.title;
+
+  const title = data.title;
     const location = data.location;
     const capacity = data.capacity;
     const dateTime = data.dateTime;
+
+   const existingEvent = await Event.findOne({ title, dateTime, location });
+
+    if (existingEvent) {
+          throw {
+             status: 409,
+            message: "Duplicate event: same title, location, and time already exists"
+            };
+         }
+
 
     const createEvent = await Event.create({
       title,
@@ -17,6 +28,7 @@ export const createEvent = async (data) => {
     return createEvent;
   } catch (error) {
     console.log("Error while creating an event", error);
+    throw error;
   }
 };
 

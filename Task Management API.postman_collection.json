@@ -1,0 +1,406 @@
+{
+  "info": {
+    "_postman_id": "d222b9f4-32b3-47ee-b880-2761766cf1e2",
+    "name": "Task Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39105075"
+  },
+  "item": [
+    {
+      "name": "createEvent",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"study Orientation\",\n  \"dateTime\": \"2025-08-20T10:00:00Z\",\n  \"location\": \"Mumbai\",\n  \"capacity\":200\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3002/api/event/create",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3002",
+          "path": ["api", "event", "create"]
+        }
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "event Created Successfully",
+          "data": {
+            "title": "Mern Stack Masterclass",
+            "dateTime": "2025-09-10T10:00:00.000Z",
+            "location": "Delhi",
+            "capacity": 350,
+            "registrations": [],
+            "_id": "68767f49f97d541a68cd0efd",
+            "createdAt": "2025-07-15T16:18:17.963Z",
+            "updatedAt": "2025-07-15T16:18:17.963Z",
+            "__v": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "CreateUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"rohan\",\n  \"email\": \"rohan@admin.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3002/api/user/create",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3002",
+          "path": ["api", "user", "create"]
+        }
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "User is created successfully",
+          "data": {
+            "name": "Rohan",
+            "email": "rohan@admin.com",
+            "_id": "68767fd4f97d541a68cd0eff",
+            "createdAt": "2025-07-15T16:20:36.480Z",
+            "updatedAt": "2025-07-15T16:20:36.480Z",
+            "__v": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Register user to event",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"68761a8084daaa184509da84\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3002/api/event/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3002",
+          "path": ["api", "event", ""]
+        }
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "User is Registered Successfully",
+          "data": {
+            "_id": "68761a8084daaa184509da84",
+            "title": "study Orientation",
+            "dateTime": "2025-08-20T10:00:00.000Z",
+            "location": "Mumbai",
+            "capacity": 200,
+            "registrations": [
+              "687647e5d755f5c98cd94a90",
+              "68767fd4f97d541a68cd0eff"
+            ],
+            "createdAt": "2025-07-15T09:08:16.376Z",
+            "updatedAt": "2025-07-15T16:22:45.484Z",
+            "__v": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cancel User Registration From Event",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"68767fd4f97d541a68cd0eff\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3002/api/event/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3002",
+          "path": ["api", "event", ""]
+        }
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "User is Registration is Cancelled"
+        }
+      ]
+    },
+    {
+      "name": "GetEventAll",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "All event fetched successfully",
+          "data": [
+            {
+              "_id": "68761a8084daaa184509da84",
+              "title": "study Orientation",
+              "dateTime": "2025-08-20T10:00:00.000Z",
+              "location": "Mumbai",
+              "capacity": 200,
+              "registrations": ["687647e5d755f5c98cd94a90"],
+              "createdAt": "2025-07-15T09:08:16.376Z",
+              "updatedAt": "2025-07-15T16:24:24.642Z",
+              "__v": 5
+            },
+            {
+              "_id": "68764fe4145739fe315dc665",
+              "title": "Start up Pitch",
+              "dateTime": "2025-09-20T10:00:00.000Z",
+              "location": "Pune",
+              "capacity": 200,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:56:04.582Z",
+              "updatedAt": "2025-07-15T12:56:04.582Z",
+              "__v": 0
+            },
+            {
+              "_id": "68765050145739fe315dc667",
+              "title": "AI & Machine Learning Conference",
+              "dateTime": "2025-09-28T10:00:00.000Z",
+              "location": "Delhi",
+              "capacity": 150,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:57:52.824Z",
+              "updatedAt": "2025-07-15T12:57:52.824Z",
+              "__v": 0
+            },
+            {
+              "_id": "6876507f145739fe315dc669",
+              "title": "Frontend Dev Meetup",
+              "dateTime": "2025-10-10T10:00:00.000Z",
+              "location": "Banglore",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:58:39.357Z",
+              "updatedAt": "2025-07-15T12:58:39.357Z",
+              "__v": 0
+            },
+            {
+              "_id": "68765204abff6c2e83f22c4f",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T13:05:08.826Z",
+              "updatedAt": "2025-07-15T13:05:08.826Z",
+              "__v": 0
+            },
+            {
+              "_id": "687678c2852f8740b88f1957",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T15:50:26.203Z",
+              "updatedAt": "2025-07-15T15:50:26.203Z",
+              "__v": 0
+            },
+            {
+              "_id": "687678dd852f8740b88f1959",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T15:50:53.344Z",
+              "updatedAt": "2025-07-15T15:50:53.344Z",
+              "__v": 0
+            },
+            {
+              "_id": "687678ea852f8740b88f195b",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T15:51:06.178Z",
+              "updatedAt": "2025-07-15T15:51:06.178Z",
+              "__v": 0
+            },
+            {
+              "_id": "68767a9040ba8731a37e0f5b",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T15:58:08.782Z",
+              "updatedAt": "2025-07-15T15:58:08.782Z",
+              "__v": 0
+            },
+            {
+              "_id": "68767afa96db2473d48f70ed",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T15:59:54.635Z",
+              "updatedAt": "2025-07-15T15:59:54.635Z",
+              "__v": 0
+            },
+            {
+              "_id": "68767b2869b254a84a094c8e",
+              "title": "Javascript MasterClass",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T16:00:40.235Z",
+              "updatedAt": "2025-07-15T16:00:40.235Z",
+              "__v": 0
+            },
+            {
+              "_id": "68767e0e901c36a3afc947f1",
+              "title": "Javascript MasterCla",
+              "dateTime": "2025-06-10T10:00:00.000Z",
+              "location": "Noida",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T16:13:02.331Z",
+              "updatedAt": "2025-07-15T16:13:02.331Z",
+              "__v": 0
+            },
+            {
+              "_id": "68767f49f97d541a68cd0efd",
+              "title": "Mern Stack Masterclass",
+              "dateTime": "2025-09-10T10:00:00.000Z",
+              "location": "Delhi",
+              "capacity": 350,
+              "registrations": [],
+              "createdAt": "2025-07-15T16:18:17.963Z",
+              "updatedAt": "2025-07-15T16:18:17.963Z",
+              "__v": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetFutureEvents",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "All Future Event Fetched",
+          "data": [
+            {
+              "_id": "68761a8084daaa184509da84",
+              "title": "study Orientation",
+              "dateTime": "2025-08-20T10:00:00.000Z",
+              "location": "Mumbai",
+              "capacity": 200,
+              "registrations": ["687647e5d755f5c98cd94a90"],
+              "createdAt": "2025-07-15T09:08:16.376Z",
+              "updatedAt": "2025-07-15T16:24:24.642Z",
+              "__v": 5
+            },
+            {
+              "_id": "68767f49f97d541a68cd0efd",
+              "title": "Mern Stack Masterclass",
+              "dateTime": "2025-09-10T10:00:00.000Z",
+              "location": "Delhi",
+              "capacity": 350,
+              "registrations": [],
+              "createdAt": "2025-07-15T16:18:17.963Z",
+              "updatedAt": "2025-07-15T16:18:17.963Z",
+              "__v": 0
+            },
+            {
+              "_id": "68764fe4145739fe315dc665",
+              "title": "Start up Pitch",
+              "dateTime": "2025-09-20T10:00:00.000Z",
+              "location": "Pune",
+              "capacity": 200,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:56:04.582Z",
+              "updatedAt": "2025-07-15T12:56:04.582Z",
+              "__v": 0
+            },
+            {
+              "_id": "68765050145739fe315dc667",
+              "title": "AI & Machine Learning Conference",
+              "dateTime": "2025-09-28T10:00:00.000Z",
+              "location": "Delhi",
+              "capacity": 150,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:57:52.824Z",
+              "updatedAt": "2025-07-15T12:57:52.824Z",
+              "__v": 0
+            },
+            {
+              "_id": "6876507f145739fe315dc669",
+              "title": "Frontend Dev Meetup",
+              "dateTime": "2025-10-10T10:00:00.000Z",
+              "location": "Banglore",
+              "capacity": 300,
+              "registrations": [],
+              "createdAt": "2025-07-15T12:58:39.357Z",
+              "updatedAt": "2025-07-15T12:58:39.357Z",
+              "__v": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "getEventStats",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "success": true,
+          "message": "All Event Stats fetch successfully",
+          "data": {
+            "EventId": "68761a8084daaa184509da84",
+            "totalregistration": 1,
+            "remaningcapacity": 199,
+            "percentageused": 1
+          }
+        }
+      ]
+    }
+  ]
+}

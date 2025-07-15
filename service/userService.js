@@ -9,5 +9,6 @@ export const CreateUserService = async (data) => {
     return createuser;
   } catch (error) {
     console.log("Error while creating the user",error);
+    throw error;
   }
 };

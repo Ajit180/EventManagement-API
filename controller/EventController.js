@@ -19,6 +19,10 @@ export const createEventController = async(req,res)=>{
         
       } catch (error) {
         console.log("Error while creating an event",error.message);
+        return res.status(500).json({
+            success: false,
+            message: error.message || "Internal server error"
+            });
       }
 }
 

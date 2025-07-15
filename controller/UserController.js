@@ -16,6 +16,17 @@ export const CreateUserController = async(req,res)=>{
         })
         
     } catch (error) {
-        console.log("Error while creating the an User",error.message)
+        console.log("Error while creating the an User",error.message);
+        if (error.code === 11000) {
+            return res.status(409).json({
+              success: false,
+              message: "Email already exists"
+          });
+        }
+
+       return res.status(500).json({
+         success: false,
+         message: "Internal server error"
+       });
     }
 }
