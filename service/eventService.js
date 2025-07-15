@@ -1,0 +1,83 @@
+import Event from "../model/event.js";
+import User from "../model/user.js";
+
+export const createEvent = async (data) => {
+  try {
+    const title = data.title;
+    const location = data.location;
+    const capacity = data.capacity;
+    const dateTime = data.dateTime;
+
+    const createEvent = await Event.create({
+      title,
+      dateTime,
+      location,
+      capacity,
+    });
+
+    return createEvent;
+  } catch (error) {
+    console.log("Error while creating an event", error);
+  }
+};
+
+export const getAllEventService = async () => {
+  try {
+    const getAllEvent = await Event.find();
+    return getAllEvent;
+  } catch (error) {}
+};
+
+export const registerUserService = async (EventId, userId) => {
+  try {
+    //if Event is exits
+    const EventFetch = await Event.findById(EventId);
+    console.log(EventId);
+    if (!EventFetch) {
+      throw {
+        status: 404,
+        message: "Event is not Exits",
+      };
+    }
+    //validate the Event not in Past , not full , user not already present
+
+    //check the user is present or not
+    // const alreadyRegistred = EventFetch.registrations.includes(userId);
+    console.log("Comparing:", userId, EventFetch.registrations);
+
+      const alreadyRegistred = EventFetch.registrations.some(
+        (registredUserId)=>registredUserId.toString()===userId
+      )
+      console.log(alreadyRegistred);
+      if(alreadyRegistred){
+        throw{
+            status:409,
+            message:"User is Already Registered"
+        }
+      }
+
+    //validate the Event not in Past 
+    const now = Date.now();
+    const Eventdate = EventFetch.dateTime;
+    if(Eventdate<now){
+        throw{
+            status:400,
+            message:"Cannot Register for the past Event"
+        }
+    }
+
+    const eventcapacity = EventFetch.capacity;
+ //push the userId when the user is not already registred ,data is not past and the capcity not filled 
+    if(!alreadyRegistred && Eventdate>now && eventcapacity<1000){
+        EventFetch.registrations.push(userId);
+        await EventFetch.save();
+    }
+
+
+    return EventFetch;
+
+  } catch (error) {
+    console.log("Error while registering the User",error.message);
+    throw error;
+  }
+};
